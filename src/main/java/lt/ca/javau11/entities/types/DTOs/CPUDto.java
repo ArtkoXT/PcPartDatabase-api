@@ -1,6 +1,7 @@
-package lt.ca.javau11.entities.types;
+package lt.ca.javau11.entities.types.DTOs;
 
 import lombok.Data;
+import lt.ca.javau11.entities.types.CPU;
 
 
 @Data

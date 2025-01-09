@@ -1,7 +1,7 @@
 package lt.ca.javau11.controllers;
 
 import lt.ca.javau11.entities.types.GPU;
-import lt.ca.javau11.entities.types.GPUDto;
+import lt.ca.javau11.entities.types.DTOs.GPUDto;
 import lt.ca.javau11.services.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

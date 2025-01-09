@@ -1,11 +1,9 @@
-package lt.ca.javau11.entities.types;
+package lt.ca.javau11.entities.types.DTOs;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lt.ca.javau11.entities.Manufacturer;
+import lt.ca.javau11.entities.types.GPU;
 
 @Data
 @AllArgsConstructor

@@ -1,31 +1,32 @@
 package lt.ca.javau11.services;
 
-import lt.ca.javau11.entities.types.CPU;
-import lt.ca.javau11.entities.types.CPUDto;
-import lt.ca.javau11.entities.types.GPU;
-import lt.ca.javau11.entities.types.GPUDto;
+import lombok.AllArgsConstructor;
+import lt.ca.javau11.entities.mappers.MotherboardMapper;
+import lt.ca.javau11.entities.types.*;
+import lt.ca.javau11.entities.types.DTOs.*;
 import lt.ca.javau11.exceptions.NotFoundException;
 import lt.ca.javau11.repositories.CpuRepository;
 import lt.ca.javau11.repositories.GpuRepository;
+import lt.ca.javau11.repositories.MotherboardRepository;
+import lt.ca.javau11.repositories.RamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
 
     CpuRepository cpuRepo;
     GpuRepository gpuRepo;
-
-    public ProductService( CpuRepository cpuRepo, GpuRepository gpuRepo) {
-        this.cpuRepo = cpuRepo;
-        this.gpuRepo = gpuRepo;
-    }
-
-    //CPU CRUD
+    MotherboardRepository mbRepo;
+    RamRepository ramRepo;
+    MotherboardMapper mbMapper;
 
 
+
+    //CPU CRUD operations
     public List<CPU> getAllCpus() {
         return cpuRepo.findAll();
     }
@@ -71,9 +72,7 @@ public class ProductService {
         return true;
     }
 
-    //GPU CRUD
-
-
+    //GPU CRUD operations
     public List<GPUDto> getAllGPUs() {
         return gpuRepo.findAll().stream().map(GPUDto::new).toList();
     }
@@ -121,4 +120,21 @@ public class ProductService {
         return true;
     }
 
+    // Motherboard CRUD operations
+    public List<MotherboardDto> getAllMotherboards() {
+        return mbRepo.findAll().stream().map(MotherboardDto::new).toList();
+    }
+
+    public Motherboard addNewMotherboard(Motherboard mb) {
+        return mbRepo.save(mb);
+    }
+
+    public Motherboard updateMotherboard(Long id, Motherboard mobo) {
+        Motherboard mb = mbRepo.findById(id)
+                .orElseThrow( () -> new NotFoundException("Motherboard with id " + id + " not found!"));
+
+        mbMapper.updateMotherboard(mobo,mb);
+
+        return mbRepo.save(mb);
+    }
 }
