@@ -2,10 +2,9 @@ package lt.ca.javau11.entities.types;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lt.ca.javau11.entities.Manufacturer;
+import lt.ca.javau11.entities.Product;
 import lt.ca.javau11.entities.ProductType;
 
 
@@ -14,7 +13,7 @@ import lt.ca.javau11.entities.ProductType;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CPU {
+public class CPU extends Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +25,12 @@ public class CPU {
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    @JsonBackReference
+    @JsonBackReference("manufacturer")
     private Manufacturer manufacturer;
 
     @ManyToOne
     @JoinColumn(name = "productType_id")
-    @JsonBackReference
+    @JsonBackReference("productType")
     private ProductType productType;
 
     private String model;

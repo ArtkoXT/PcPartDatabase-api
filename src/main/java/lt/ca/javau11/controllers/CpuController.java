@@ -34,8 +34,8 @@ public class CpuController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CPU> updateCPU(@PathVariable Long id, @RequestBody CPU cpu) {
-        return ResponseEntity.of( productService.updateCpu(id, cpu));
+    public CPU updateCPU(@PathVariable Long id, @RequestBody CPU cpu) {
+        return productService.updateCpu(id, cpu);
     }
 
     @DeleteMapping("/{id}")

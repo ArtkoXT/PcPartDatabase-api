@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lt.ca.javau11.entities.Manufacturer;
+import lt.ca.javau11.entities.Product;
 import lt.ca.javau11.entities.ProductType;
 
 @Entity
@@ -13,7 +14,7 @@ import lt.ca.javau11.entities.ProductType;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Motherboard {
+public class Motherboard extends Product {
     //Manufacturer
     //Model
     //Socket
@@ -34,12 +35,12 @@ public class Motherboard {
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    @JsonBackReference
+    @JsonBackReference("manufacturer")
     private Manufacturer manufacturer;
 
     @ManyToOne
     @JoinColumn(name = "productType_id")
-    @JsonBackReference
+    @JsonBackReference("productType")
     private ProductType productType;
 
     private String model;

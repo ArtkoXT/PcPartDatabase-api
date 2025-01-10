@@ -1,7 +1,7 @@
 package lt.ca.javau11.services;
 
 import lombok.AllArgsConstructor;
-import lt.ca.javau11.entities.mappers.MotherboardMapper;
+import lt.ca.javau11.entities.mappers.EntityMapper;
 import lt.ca.javau11.entities.types.*;
 import lt.ca.javau11.entities.types.DTOs.*;
 import lt.ca.javau11.exceptions.NotFoundException;
@@ -15,18 +15,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class ProductService {
 
     CpuRepository cpuRepo;
     GpuRepository gpuRepo;
     MotherboardRepository mbRepo;
     RamRepository ramRepo;
-    MotherboardMapper mbMapper;
+    EntityMapper entityMapper;
 
 
+    public ProductService(CpuRepository cpuRepo, GpuRepository gpuRepo, MotherboardRepository mbRepo, RamRepository ramRepo, EntityMapper entityMapper) {
+        this.cpuRepo = cpuRepo;
+        this.gpuRepo = gpuRepo;
+        this.mbRepo = mbRepo;
+        this.ramRepo = ramRepo;
+        this.entityMapper = entityMapper;
+    }
 
+    //
     //CPU CRUD operations
+    //
     public List<CPU> getAllCpus() {
         return cpuRepo.findAll();
     }
@@ -41,25 +49,12 @@ public class ProductService {
                 .orElseThrow( () -> new NotFoundException("Cpu with id " + id + " not found!"));
     }
 
-    public Optional<CPU> updateCpu(Long id, CPU cpu) {
-        Optional<CPU> updateCPU = cpuRepo.findById(id);
-        if ( updateCPU.isPresent()) {
-            CPU existingCPU = updateCPU.get();
-                existingCPU.setModel(cpu.getModel());
-                existingCPU.setManufacturer(cpu.getManufacturer());
-                existingCPU.setCoreClock(cpu.getCoreClock());
-                existingCPU.setBoostClock(cpu.getBoostClock());
-                existingCPU.setTdp(cpu.getTdp());
-                existingCPU.setIntegratedGraphics(cpu.getIntegratedGraphics());
-                existingCPU.setArchitecture(cpu.getArchitecture());
-                existingCPU.setSocket(cpu.getSocket());
-                existingCPU.setCoreCount(cpu.getCoreCount());
-                existingCPU.setThreadCount(cpu.getThreadCount());
-                existingCPU.setL2cache(cpu.getL2cache());
-                existingCPU.setL3cache(cpu.getL3cache());
-            return Optional.of(cpuRepo.save(existingCPU));
-        }
-        return Optional.empty();
+    public CPU updateCpu(Long id, CPU source) {
+        CPU target = cpuRepo.findById(id).orElseThrow( () -> new NotFoundException("Cpu with id " + id + " not found!") );
+
+        entityMapper.updateProduct(source, target);
+
+        return cpuRepo.save(target);
 
     }
 
@@ -71,8 +66,9 @@ public class ProductService {
         cpuRepo.delete(cpu.get());
         return true;
     }
-
+    //
     //GPU CRUD operations
+    //
     public List<GPUDto> getAllGPUs() {
         return gpuRepo.findAll().stream().map(GPUDto::new).toList();
     }
@@ -87,25 +83,14 @@ public class ProductService {
                 .orElseThrow( () -> new NotFoundException("Cpu with id " + id + " not found!"));
     }
 
-    public Optional<GPU> updateGpu(Long id, GPU gpu) {
-        Optional<GPU> updateGPU = gpuRepo.findById(id);
-        if ( updateGPU.isPresent()) {
-            GPU existingGPU = updateGPU.get();
-            existingGPU.setModel(gpu.getModel());
-            existingGPU.setManufacturer(gpu.getManufacturer());
-            existingGPU.setGpuName(gpu.getGpuName());
-            existingGPU.setArchitecture(gpu.getArchitecture());
-            existingGPU.setCores(gpu.getCores());
-            existingGPU.setTdp(gpu.getTdp());
-            existingGPU.setBaseClock(gpu.getBaseClock());
-            existingGPU.setBoostClock(gpu.getBoostClock());
-            existingGPU.setMemoryClock(gpu.getMemoryClock());
-            existingGPU.setMemorySize(gpu.getMemorySize());
-            existingGPU.setMemoryType(gpu.getMemoryType());
-            existingGPU.setMemoryBus(gpu.getMemoryBus());
-            existingGPU.setMemoryBandwidth(gpu.getMemoryBandwidth());
+    public Optional<GPU> updateGpu(Long id, GPU source) {
+        Optional<GPU> existingGPU = gpuRepo.findById(id);
+        if ( existingGPU.isPresent()) {
+            GPU target = existingGPU.get();
 
-            return Optional.of(gpuRepo.save(existingGPU));
+            entityMapper.updateProduct(source, target);
+
+            return Optional.of(gpuRepo.save(target));
         }
         return Optional.empty();
 
@@ -119,8 +104,9 @@ public class ProductService {
         gpuRepo.delete(gpu.get());
         return true;
     }
-
+    //
     // Motherboard CRUD operations
+    //
     public List<MotherboardDto> getAllMotherboards() {
         return mbRepo.findAll().stream().map(MotherboardDto::new).toList();
     }
@@ -129,12 +115,64 @@ public class ProductService {
         return mbRepo.save(mb);
     }
 
-    public Motherboard updateMotherboard(Long id, Motherboard mobo) {
-        Motherboard mb = mbRepo.findById(id)
+    public Motherboard getMotherboardByID(Long id){
+        return mbRepo.findById(id).orElseThrow(() -> new NotFoundException("Motherboard with id " + id + " not found!"));
+    }
+
+    public Motherboard updateMotherboard(Long id, Motherboard source) {
+        Motherboard target = mbRepo.findById(id)
                 .orElseThrow( () -> new NotFoundException("Motherboard with id " + id + " not found!"));
 
-        mbMapper.updateMotherboard(mobo,mb);
+        entityMapper.updateProduct(source,target);
 
-        return mbRepo.save(mb);
+        return mbRepo.save(target);
+    }
+
+    public boolean deleteMotherboard(Long id) {
+        Optional<Motherboard> mb = mbRepo.findById(id);
+        if (mb.isEmpty())
+            return false;
+
+        mbRepo.delete(mb.get());
+        return true;
+    }
+    //
+    // RAM CRUD operations
+    //
+    public List<RAMDto> getAllRAM(){
+        return ramRepo.findAll().stream().map(RAMDto::new).toList();
+    }
+
+    public RAM addRAM(RAM ram){
+        return ramRepo.save(ram);
+    }
+
+    public RAMDto getRamByID(Long id){
+        return ramRepo.findById(id)
+                .map(RAMDto::new)
+                .orElseThrow( () -> new NotFoundException("RAM with id " + id + " not found!") );
+    }
+
+    public Optional<RAM> updateRAM(Long id, RAM source){
+        Optional<RAM> existingRam = ramRepo.findById(id);
+
+        if ( existingRam.isPresent() ){
+            RAM target = existingRam.get();
+
+            entityMapper.updateProduct(source, target);
+
+            return Optional.of(ramRepo.save(source));
+        }
+        return Optional.empty();
+    }
+
+    public boolean deleteRAM(Long id){
+        Optional<RAM> ram = ramRepo.findById(id);
+
+        if (ram.isEmpty())
+            return false;
+
+        ramRepo.delete(ram.get());
+        return true;
     }
 }

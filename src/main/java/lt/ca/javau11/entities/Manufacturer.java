@@ -24,19 +24,19 @@ public class Manufacturer {
     private String name;
 
     @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("manufacturer")
     private List<CPU> cpus = new ArrayList<>();
 
     @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("manufacturer")
     private List<GPU> gpus = new ArrayList<>();
 
     @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("manufacturer")
     private List<Motherboard> mobos = new ArrayList<>();
 
     @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("manufacturer")
     private List<RAM> ram = new ArrayList<>();
 
     public void addCPU(CPU cpu ) {

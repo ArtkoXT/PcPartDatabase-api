@@ -27,19 +27,19 @@ public class ProductType {
     private String typeName;
 
     @OneToMany(mappedBy = "productType")
-    @JsonManagedReference
+    @JsonManagedReference("productType")
     private List<CPU> cpus = new ArrayList<>();
 
     @OneToMany(mappedBy = "productType")
-    @JsonManagedReference
+    @JsonManagedReference("productType")
     private List<GPU> gpus = new ArrayList<>();
 
     @OneToMany(mappedBy = "productType")
-    @JsonManagedReference
+    @JsonManagedReference("productType")
     private List<Motherboard> mobos = new ArrayList<>();
 
     @OneToMany(mappedBy = "productType")
-    @JsonManagedReference
+    @JsonManagedReference("productType")
     private List<RAM> ram = new ArrayList<>();
 
     public void addGPU(GPU gpu) {
