@@ -105,10 +105,10 @@ public class DataSeeder implements CommandLineRunner {
 
     public ProductType[] createProductTypes(){
         ProductType[] productTypes = {
-                new ProductType("CPU"),
-                new ProductType("GPU"),
-                new ProductType("Motherboard"),
-                new ProductType("RAM")
+                new ProductType("CPUs","https://t3.ftcdn.net/jpg/00/81/24/72/360_F_81247213_OYvGTCn5mnQQ2c0gWJ1U5ixcbmNBaMOp.jpg"),
+                new ProductType("Graphic Cards","https://media.istockphoto.com/id/1180632542/photo/game-graphics-card-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=jgLiheKNlcuB4_D0ZGO9GdjouRQWPmPsIjP7jh-ivCk="),
+                new ProductType("Motherboards","https://static.trackalacker.com/cdn-cgi/image/fit=pad,width=600,height=600,quality=85,format=auto/uploads/products/listings/photo_item/photo/102179/asus-pro-ws-w680-ace-ipmi-lga-1700-atx-motherboard.jpeg"),
+                new ProductType("Memory","https://st2.depositphotos.com/2454597/9931/i/950/depositphotos_99312556-stock-photo-modern-ram-memory-modules-with.jpg")
         };
         return productTypes;
     }

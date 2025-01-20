@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gpus")
+@CrossOrigin
 public class GpuController {
 
     ProductService productService;

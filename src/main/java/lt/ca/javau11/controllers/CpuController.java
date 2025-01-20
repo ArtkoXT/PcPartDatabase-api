@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cpus")
+@CrossOrigin
 public class CpuController {
 
     ProductService productService;
@@ -19,8 +20,8 @@ public class CpuController {
     }
 
     @GetMapping("/all")
-    public List<CPU> getAllCpus(){
-        return productService.getAllCpus();
+    public List<CPUDto> getAllCpus(){
+        return productService.getAllCpus().stream().map(CPUDto::new).toList();
     }
 
     @GetMapping("/{id}")

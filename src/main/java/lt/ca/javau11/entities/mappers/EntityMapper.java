@@ -11,7 +11,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EntityMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -26,12 +26,9 @@ public interface EntityMapper {
     @Mapping(target = "id", ignore = true)
     void updateProduct(RAM source, @MappingTarget RAM target);
 
-//    @Mapping(target = "id", ignore = true)
-//    void updateProduct(Product source, @MappingTarget Product target);
-//
     @Mapping(target = "id", ignore = true)
     void updateManufacturer(Manufacturer source, @MappingTarget Manufacturer target);
 
-//    @Mapping(target = "id", ignore = true)
-//    void updateProductType(ProductType source, @MappingTarget ProductType target);
+    @Mapping(target = "id", ignore = true)
+    void updateProductType(ProductType source, @MappingTarget ProductType target);
 }

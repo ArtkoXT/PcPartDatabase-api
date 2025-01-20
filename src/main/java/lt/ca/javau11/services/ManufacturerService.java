@@ -22,6 +22,10 @@ public class ManufacturerService {
         return manufacturerRepo.findAll();
     }
 
+    public Manufacturer addNewManufacturer(Manufacturer manufacturer) {
+        return manufacturerRepo.save(manufacturer);
+    }
+
     public Manufacturer getManufacturerByID(Long id) {
         return manufacturerRepo.findById(id).orElseThrow( () -> new NotFoundException("Manufacturer with ID " + id + " not found!"));
     }
@@ -38,5 +42,15 @@ public class ManufacturerService {
         }
 
         return Optional.empty();
+    }
+
+    public boolean deleteManufacturer(Long id){
+        Optional<Manufacturer> manufacturer = manufacturerRepo.findById(id);
+
+        if( manufacturer.isEmpty() )
+            return false;
+
+        manufacturerRepo.delete(manufacturer.get());
+        return true;
     }
 }

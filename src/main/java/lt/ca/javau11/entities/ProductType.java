@@ -25,6 +25,7 @@ public class ProductType {
     private Long id;
 
     private String typeName;
+    private String imageUrl;
 
     @OneToMany(mappedBy = "productType")
     @JsonManagedReference("productType")
@@ -68,7 +69,8 @@ public class ProductType {
         cpuList.forEach( c -> c.setProductType(this));
     }
 
-    public ProductType(String typeName) {
+    public ProductType(String typeName, String imageUrl) {
         this.typeName = typeName;
+        this.imageUrl = imageUrl;
     }
 }

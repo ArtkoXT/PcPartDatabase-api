@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/ram")
+@CrossOrigin
 public class RamController {
 
     ProductService productService;

@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/motherboards")
 @AllArgsConstructor
+@CrossOrigin
 public class MotherboardController {
 
     ProductService productService;
