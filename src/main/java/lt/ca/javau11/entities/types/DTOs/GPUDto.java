@@ -20,7 +20,7 @@ public class GPUDto {
     private String model;
     private String gpuName;
     private String architecture;
-    private String cores;
+    private Integer cores;
     private String tdp;
     private String baseClock;
     private String boostClock;
@@ -39,14 +39,14 @@ public class GPUDto {
         this.gpuName = gpu.getGpuName();
         this.architecture = gpu.getArchitecture();
         this.cores = gpu.getCores();
-        this.tdp = gpu.getTdp();
-        this.baseClock = gpu.getBaseClock();
-        this.boostClock = gpu.getBoostClock();
-        this.memoryClock = gpu.getMemoryClock();
-        this.memorySize = gpu.getMemorySize();
+        this.tdp = gpu.getTdp() + " W";
+        this.baseClock = gpu.getBaseClock() + " MHz";
+        this.boostClock = gpu.getBoostClock() + " MHz";
+        this.memoryClock = gpu.getMemoryClock() + " MHz";
+        this.memorySize = gpu.getMemorySize() + " GB";
         this.memoryType = gpu.getMemoryType();
-        this.memoryBus = gpu.getMemoryBus();
-        this.memoryBandwidth = gpu.getMemoryBandwidth();
+        this.memoryBus = gpu.getMemoryBus() + " bit";
+        this.memoryBandwidth = gpu.getMemoryBandwidth() + " GB/s";
     }
 
 }

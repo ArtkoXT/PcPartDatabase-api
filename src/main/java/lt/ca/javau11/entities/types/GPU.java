@@ -2,16 +2,15 @@ package lt.ca.javau11.entities.types;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lt.ca.javau11.entities.Manufacturer;
 import lt.ca.javau11.entities.Product;
 import lt.ca.javau11.entities.ProductType;
 
 @Entity
 @Table(name = "gpus")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class GPU extends Product {
@@ -33,17 +32,17 @@ public class GPU extends Product {
     private String model;
     private String gpuName;
     private String architecture;
-    private String cores;
-    private String tdp;
-    private String baseClock;
-    private String boostClock;
-    private String memoryClock;
-    private String memorySize;
+    private Integer cores;
+    private Integer tdp;
+    private Integer baseClock;
+    private Integer boostClock;
+    private Integer memoryClock;
+    private Integer memorySize;
     private String memoryType;
-    private String memoryBus;
-    private String memoryBandwidth;
+    private Integer memoryBus;
+    private Float memoryBandwidth;
 
-    public GPU(String model, String gpuName, String architecture, String cores, String tdp, String baseClock, String boostClock, String memoryClock, String memorySize, String memoryType, String memoryBus, String memoryBandwidth) {
+    public GPU(String model, String gpuName, String architecture, Integer cores, Integer tdp, Integer baseClock, Integer boostClock, Integer memoryClock, Integer memorySize, String memoryType, Integer memoryBus, Float memoryBandwidth) {
         this.model = model;
         this.gpuName = gpuName;
         this.architecture = architecture;

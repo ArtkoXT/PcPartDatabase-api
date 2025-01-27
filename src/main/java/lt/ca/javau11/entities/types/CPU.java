@@ -10,7 +10,8 @@ import lt.ca.javau11.entities.ProductType;
 
 @Entity
 @Table(name = "cpus")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CPU extends Product {
@@ -34,19 +35,19 @@ public class CPU extends Product {
     private ProductType productType;
 
     private String model;
-    private String coreClock;
-    private String boostClock;
-    private String tdp;
+    private Float coreClock;
+    private Float boostClock;
+    private Integer tdp;
     private String integratedGraphics;
     private String architecture;
     private String socket;
-    private String coreCount;
-    private String threadCount;
-    private String l2cache;
-    private String l3cache;
+    private Integer coreCount;
+    private Integer threadCount;
+    private Integer l2cache;
+    private Integer l3cache;
 
 
-    public CPU(String model, String coreClock, String boostClock, String tdp, String integratedGraphics, String architecture, String socket, String coreCount, String threadCount, String l2cache, String l3cache) {
+    public CPU( String model, Float coreClock, Float boostClock, Integer tdp, String integratedGraphics, String architecture, String socket, Integer coreCount, Integer threadCount, Integer l2cache, Integer l3cache) {
         this.model = model;
         this.coreClock = coreClock;
         this.boostClock = boostClock;

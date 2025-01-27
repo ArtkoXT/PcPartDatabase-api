@@ -32,7 +32,7 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if( manufacturerRepo.count() == 0 ) {
             seedManufacturers(); // Adds default manufacturers and their products if none exist
         }
@@ -116,60 +116,61 @@ public class DataSeeder implements CommandLineRunner {
         //Create AMD CPUs
 
         CPU cpu1 = new CPU(
-                "Ryzen 7 7800X3D", "4.2 GHz",
-                "5.0 GHz",
-                "120 W",
+                "Ryzen 7 7800X3D",
+                4.2f,
+                5.0f,
+                120,
                 "AMD Radeon™ Graphics",
                 "Zen 4",
                 "AM5",
-                "8",
-                "16",
-                "8 MB",
-                "96 MB"
+                8,
+                16,
+                8,
+                96
         );
 
         CPU cpu2 = new CPU(
             "Ryzen 7 9800X3D",
-            "4.7 GHz",
-            "5.2 GHz",
-            "120 W",
+            4.7f,
+            5.2f,
+            120,
             "AMD Radeon™ Graphics",
             "Zen 5",
             "AM5",
-            "8",
-            "16",
-            "8 MB",
-            "96 MB"
+            8,
+            16,
+            8,
+            96
         );
 
         //Create Intel CPUs
 
         CPU cpu3 = new CPU(
             "i7 14700K",
-            "3.4 GHz",
-            "5.6 GHz",
-            "125 W",
+            3.4f,
+            5.6f,
+            125,
             "UHD Graphics 770",
             "Raptor Lake-R",
             "FCLGA1700",
-            "20",
-            "28",
-            "28 MB",
-            "33 MB"
+            20,
+            28,
+            28,
+            33
         );
 
         CPU cpu4 = new CPU(
             "i7 13700K",
-            "3.4 GHz",
-            "5.4 GHz",
-            "125 W",
+            3.4f,
+            5.4f,
+            125,
             "UHD Graphics 770",
             "Raptor Lake-S",
             "FCLGA1700",
-            "16",
-            "24",
-            "24 MB",
-            "30 MB"
+            16,
+            24,
+            24,
+            30
         );
 
         return List.of(cpu1, cpu2, cpu3 ,cpu4);
@@ -183,30 +184,30 @@ public class DataSeeder implements CommandLineRunner {
             "GeForce RTX 4080",
             "AD103",
             "Ada Lovelace",
-            "9728",
-            "320 W",
-            "2205 MHz",
-            "2505 MHz",
-            "1400 MHz",
-            "16 GB",
+            9728,
+            320,
+            2205,
+            2505,
+            1400,
+            16,
             "GDDR6X",
-            "256 bit",
-            "716.8 GB/s"
+            256,
+            716.8f
         );
 
         GPU gpu2 = new GPU(
             "GeForce RTX 3080",
             "GA102",
             "Ampere",
-            "8704",
-            "320 W",
-            "1440 MHz",
-            "1710 MHz",
-            "1188 MHz",
-            "10 GB",
+            8704,
+            320,
+            1440,
+            1710,
+            1188,
+            10,
             "GDDR6X",
-            "320 bit",
-            "760.3 GB/s"
+            320,
+            760.3f
         );
 
         //Create AMD GPUs
@@ -215,30 +216,30 @@ public class DataSeeder implements CommandLineRunner {
             "Radeon RX 7900 XTX",
             "Navi 31",
             "RDNA 3.0",
-            "6144",
-            "355 W",
-            "1929 MHz",
-            "2498 MHz",
-            "2500 MHz",
-            "24 GB",
+            6144,
+            355,
+            1929,
+            2498,
+            2500,
+            24,
             "GDDR6",
-            "384 bit",
-            "960.0 GB/s"
+            384,
+            960.0f
         );
 
         GPU gpu4 = new GPU(
             "Radeon RX 6950 XT",
             "Navi 21",
             "RDNA 2.0",
-            "5120",
-            "335 W",
-            "1860 MHz",
-            "2310 MHz",
-            "2250 MHz",
-            "16 GB",
+            5120,
+            335,
+            1860,
+            2310,
+            2250,
+            16,
             "GDDR6X",
-            "256 bit",
-            "567.0 GB/s"
+            256,
+            567.0f
         );
 
         return List.of(gpu1, gpu2, gpu3, gpu4);

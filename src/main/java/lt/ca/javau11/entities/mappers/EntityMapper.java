@@ -1,8 +1,8 @@
 package lt.ca.javau11.entities.mappers;
 
 import lt.ca.javau11.entities.Manufacturer;
-import lt.ca.javau11.entities.Product;
 import lt.ca.javau11.entities.ProductType;
+import lt.ca.javau11.entities.User;
 import lt.ca.javau11.entities.types.CPU;
 import lt.ca.javau11.entities.types.GPU;
 import lt.ca.javau11.entities.types.Motherboard;
@@ -31,4 +31,7 @@ public interface EntityMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateProductType(ProductType source, @MappingTarget ProductType target);
+
+    @Mapping(target = "id", ignore = true)
+    void updateUser(User source, @MappingTarget User target);
 }

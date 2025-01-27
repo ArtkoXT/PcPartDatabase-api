@@ -2,19 +2,19 @@ package lt.ca.javau11.entities.types;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lt.ca.javau11.entities.Manufacturer;
 import lt.ca.javau11.entities.Product;
 import lt.ca.javau11.entities.ProductType;
 
 @Entity
 @Table(name = "motherboards")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Motherboard extends Product {
+
     //Manufacturer
     //Model
     //Socket
