@@ -23,6 +23,10 @@ public class Manufacturer {
     private Long id;
     private String name;
 
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
+    @JsonManagedReference("manufacturer")
+    private List<Component> components = new ArrayList<>();
+
     @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
     @JsonManagedReference("manufacturer")
     private List<CPU> cpus = new ArrayList<>();
