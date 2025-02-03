@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lt.ca.javau11.entities.types.CPU;
-import lt.ca.javau11.entities.types.GPU;
-import lt.ca.javau11.entities.types.Motherboard;
-import lt.ca.javau11.entities.types.RAM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,56 +23,16 @@ public class Manufacturer {
     @JsonManagedReference("manufacturer")
     private List<Component> components = new ArrayList<>();
 
-    @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference("manufacturer")
-    private List<CPU> cpus = new ArrayList<>();
 
-    @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference("manufacturer")
-    private List<GPU> gpus = new ArrayList<>();
-
-    @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference("manufacturer")
-    private List<Motherboard> mobos = new ArrayList<>();
-
-    @OneToMany( mappedBy = "manufacturer", cascade = CascadeType.ALL)
-    @JsonManagedReference("manufacturer")
-    private List<RAM> ram = new ArrayList<>();
-
-    public void addCPU(CPU cpu ) {
-        cpus.add(cpu);
-        cpu.setManufacturer(this);
-    }
-
-    public void addGPU(GPU gpu ) {
-        gpus.add(gpu);
-        gpu.setManufacturer(this);
-    }
-
-    public void addMobo(Motherboard mobo){
-        mobos.add(mobo);
-        mobo.setManufacturer(this);
-    }
-
-    public void addRam(RAM rm){
-        ram.add(rm);
-        rm.setManufacturer(this);
-    }
-
-    public void removeCPU(CPU cpu) {
-        cpus.remove(cpu);
-        cpu.setManufacturer(null);
-    }
-
-    public Manufacturer(Long id, String name, List<CPU> cpus) {
+    public Manufacturer(Long id, String name, List<Component> components) {
         this.id = id;
         this.name = name;
-        this.cpus = cpus;
+        this.components = components;
     }
 
-    public Manufacturer(String name, List<CPU> cpus) {
+    public Manufacturer(String name, List<Component> components) {
         this.name = name;
-        this.cpus = cpus;
+        this.components = components;
     }
 
     public Manufacturer(String name) {
