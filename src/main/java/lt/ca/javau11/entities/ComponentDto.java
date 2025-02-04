@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ComponentDto {
 
     private Long id;
+    private Long manufacturer_id;
     private String name;
     private String manufacturer_name;
     private Category category;
@@ -19,6 +20,7 @@ public class ComponentDto {
 
     public ComponentDto(Component component) {
         this.id = component.getId();
+        this.manufacturer_id = component.getManufacturer().getId();
         this.name = component.getName();
         this.manufacturer_name = component.getManufacturer().getName();
         this.category = component.getCategory();

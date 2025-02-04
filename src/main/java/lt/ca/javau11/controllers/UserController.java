@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @AllArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     UserService userService;
@@ -26,7 +26,7 @@ public class UserController {
         return ResponseEntity.of(userService.getUserByID(id));
     }
 
-    @PostMapping("/add")
+    @PostMapping("/register")
     public User addNewUser(@RequestBody User user) {
         return userService.addUser(user);
     }
