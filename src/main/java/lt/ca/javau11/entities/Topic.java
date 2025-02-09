@@ -20,6 +20,10 @@ public class Topic {
     @Column(nullable = false, length = 100)
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
+
     @Formula("(select count(*) from messages m where m.topic=id)")
     private int messageCount = 0;
 

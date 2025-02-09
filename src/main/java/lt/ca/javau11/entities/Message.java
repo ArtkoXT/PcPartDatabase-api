@@ -28,6 +28,10 @@ public class Message {
     @ManyToOne(optional=false)
     private Topic topic;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
+
     public Message(String content, Topic topic) {
         this.createTime = new Date();
         this.content = content;
