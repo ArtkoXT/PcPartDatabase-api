@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Message {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
-    public Message(String content, Topic topic) {
+    public Comment(String content, Topic topic) {
         this.createTime = new Date();
         this.content = content;
         this.topic = topic;

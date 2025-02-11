@@ -8,6 +8,7 @@ import lt.ca.javau11.entities.ComponentDto;
 import lt.ca.javau11.entities.mappers.EntityMapper;
 import lt.ca.javau11.exceptions.NotFoundException;
 import lt.ca.javau11.repositories.ComponentRepository;
+import lt.ca.javau11.repositories.ManufacturerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ComponentService {
 
+    ManufacturerRepository manufacturerRepo;
     ComponentRepository componentRepository;
     EntityMapper entityMapper;
 
@@ -44,28 +46,49 @@ public class ComponentService {
         return true;
     }
 
-    public Component addNewComponent(Component component) {
-        validateComponent(component.getCategory(), component.getProperties());
+    public ComponentDto addNewComponent(ComponentDto component) {
+        validateProperties(component.getCategory(), component.getProperties());
 
-        return componentRepository.save(component);
+        Component newComponent = new Component();
+
+        newComponent.setId(component.getId());
+        newComponent.setName(component.getName());
+        newComponent.setManufacturer(manufacturerRepo.findById(component.getManufacturer_id()).orElseThrow( () -> new NotFoundException("Manufacturer not found!")));
+        newComponent.setCategory(component.getCategory());
+        newComponent.setPrice(component.getPrice());
+        newComponent.setProperties(component.getProperties());
+
+        componentRepository.save(newComponent);
+
+        return toComponentDto(newComponent);
     }
 
-    public Component updateComponent(Long id, Component source) {
+    public ComponentDto updateComponent(Long id, ComponentDto component) {
 
-        validateComponent(source.getCategory(), source.getProperties());
+        validateProperties(component.getCategory(), component.getProperties());
+
+        Component source = new Component();
+
+        source.setId(component.getId());
+        source.setName(component.getName());
+        source.setManufacturer(manufacturerRepo.findById(component.getManufacturer_id()).orElseThrow( () -> new NotFoundException("Manufacturer not found!")));
+        source.setCategory(component.getCategory());
+        source.setPrice(component.getPrice());
+        source.setProperties(component.getProperties());
 
         Component target = componentRepository.findById(id).orElseThrow( () -> new NotFoundException("Component not found!"));
 
         entityMapper.updateComponent(source, target);
+        componentRepository.save(target);
 
-        return componentRepository.save(target);
+        return toComponentDto(target);
     }
 
     public Category[] getAllCategories(){
         return Category.values();
     }
 
-    private void validateComponent(Category category, JsonNode properties) {
+    private void validateProperties(Category category, JsonNode properties) {
 
         Map<String, List<String>> requiredProperties = Map.of(
                 "CPU", List.of("coreClock", "boostClock", "tdp", "integratedGraphics", "architecture", "socket", "coreCount", "threadCount", "l2cache", "l3cache"),
@@ -83,5 +106,19 @@ public class ComponentService {
         if(!missingProps.isEmpty())
             throw new IllegalArgumentException("Error! " + category + " has missing properties: " + String.join(", ", missingProps));
 
+    }
+
+    private ComponentDto toComponentDto(Component component) {
+
+        ComponentDto dto = new ComponentDto();
+        dto.setId(component.getId());
+        dto.setManufacturer_id(component.getManufacturer().getId());
+        dto.setName(component.getName());
+        dto.setManufacturer_name(component.getManufacturer().getName());
+        dto.setCategory(component.getCategory());
+        dto.setPrice(component.getPrice());
+        dto.setProperties(component.getProperties());
+
+        return dto;
     }
 }

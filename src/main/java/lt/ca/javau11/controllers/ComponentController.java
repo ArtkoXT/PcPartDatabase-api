@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/components")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ComponentController {
 
     ComponentService componentService;
@@ -39,12 +39,12 @@ public class ComponentController {
     }
 
     @PostMapping("/add")
-    public Component addNewComponent(@RequestBody Component component){
+    public ComponentDto addNewComponent(@RequestBody ComponentDto component){
         return componentService.addNewComponent(component);
     }
 
     @PutMapping("/{id}")
-    public Component updateComponent(@PathVariable Long id, @RequestBody Component component) {
+    public ComponentDto updateComponent(@PathVariable Long id, @RequestBody ComponentDto component) {
         return componentService.updateComponent(id, component);
     }
 
