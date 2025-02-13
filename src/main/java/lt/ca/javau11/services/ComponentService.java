@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lt.ca.javau11.entities.Category;
 import lt.ca.javau11.entities.Component;
 import lt.ca.javau11.entities.ComponentDto;
+import lt.ca.javau11.entities.Manufacturer;
 import lt.ca.javau11.entities.mappers.EntityMapper;
 import lt.ca.javau11.exceptions.NotFoundException;
 import lt.ca.javau11.repositories.ComponentRepository;
@@ -67,18 +68,19 @@ public class ComponentService {
 
         validateProperties(component.getCategory(), component.getProperties());
 
-        Component source = new Component();
+        Component target = componentRepository.findById(id)
+                .orElseThrow( () -> new NotFoundException("Component not found!"));
 
-        source.setId(component.getId());
-        source.setName(component.getName());
-        source.setManufacturer(manufacturerRepo.findById(component.getManufacturer_id()).orElseThrow( () -> new NotFoundException("Manufacturer not found!")));
-        source.setCategory(component.getCategory());
-        source.setPrice(component.getPrice());
-        source.setProperties(component.getProperties());
+        target.setName(component.getName());
+        target.setCategory(component.getCategory());
+        target.setPrice(component.getPrice());
+        target.setProperties(component.getProperties());
 
-        Component target = componentRepository.findById(id).orElseThrow( () -> new NotFoundException("Component not found!"));
+        Manufacturer manufacturer = manufacturerRepo.findById(component.getManufacturer_id())
+                .orElseThrow( () -> new NotFoundException("Manufacturer not found!"));
 
-        entityMapper.updateComponent(source, target);
+        target.setManufacturer(manufacturer);
+
         componentRepository.save(target);
 
         return toComponentDto(target);

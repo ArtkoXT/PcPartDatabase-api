@@ -6,6 +6,7 @@ import lt.ca.javau11.entities.Component;
 import lt.ca.javau11.entities.ComponentDto;
 import lt.ca.javau11.services.ComponentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/components")
-@CrossOrigin(origins = "*")
 public class ComponentController {
 
     ComponentService componentService;

@@ -10,11 +10,11 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
-public class MessageController {
+public class CommentController {
 
     CommentService commentService;
 
-    @GetMapping("/topic/{topicId}/messages")
+    @GetMapping("/topic/{topicId}/comments")
     public List<Comment> getMessages(@PathVariable Long topicId) {
         return commentService.getMessagesForTopic(topicId);
     }
