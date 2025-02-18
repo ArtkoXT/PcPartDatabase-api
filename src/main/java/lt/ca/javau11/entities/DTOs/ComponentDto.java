@@ -1,9 +1,11 @@
-package lt.ca.javau11.entities;
+package lt.ca.javau11.entities.DTOs;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lt.ca.javau11.entities.Category;
+import lt.ca.javau11.entities.Component;
 
 @Data
 @AllArgsConstructor

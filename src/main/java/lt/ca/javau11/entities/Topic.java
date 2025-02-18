@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
 
+import java.util.Calendar;
+import java.util.Date;
+
 @Entity
 @Table(name = "topics")
 @Data
@@ -24,7 +27,7 @@ public class Topic {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
-    @Formula("(select count(*) from messages m where m.topic=id)")
+    @Formula("(select count(*) from comments m where m.topic_id=id)")
     private int messageCount = 0;
 
     public Topic(String title) {

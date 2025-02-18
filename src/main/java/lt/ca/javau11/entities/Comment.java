@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "comments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

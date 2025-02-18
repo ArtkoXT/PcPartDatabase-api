@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 import lt.ca.javau11.entities.Category;
 import lt.ca.javau11.entities.Component;
-import lt.ca.javau11.entities.ComponentDto;
+import lt.ca.javau11.entities.DTOs.ComponentDto;
 import lt.ca.javau11.entities.Manufacturer;
 import lt.ca.javau11.entities.mappers.EntityMapper;
 import lt.ca.javau11.exceptions.NotFoundException;

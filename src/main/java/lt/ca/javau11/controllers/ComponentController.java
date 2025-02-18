@@ -3,10 +3,9 @@ package lt.ca.javau11.controllers;
 import lombok.AllArgsConstructor;
 import lt.ca.javau11.entities.Category;
 import lt.ca.javau11.entities.Component;
-import lt.ca.javau11.entities.ComponentDto;
+import lt.ca.javau11.entities.DTOs.ComponentDto;
 import lt.ca.javau11.services.ComponentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
