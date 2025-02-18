@@ -11,6 +11,9 @@ import lt.ca.javau11.repositories.TopicRepository;
 import lt.ca.javau11.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -52,9 +55,18 @@ public class CommentService {
         commentDto.setContent(comment.getContent());
         commentDto.setAuthor_id(comment.getAuthor().getId());
         commentDto.setTopic_id(comment.getTopic().getId());
-        commentDto.setCreateTime(comment.getCreateTime());
+        commentDto.setCreateTime(formatDate(comment.getCreateTime()));
         commentDto.setAuthor_name(comment.getAuthor().getUsername());
 
         return commentDto;
+    }
+
+    private String formatDate(Date date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime()
+                .format(formatter);
     }
 }
