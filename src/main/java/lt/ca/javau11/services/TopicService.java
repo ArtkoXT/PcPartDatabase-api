@@ -59,6 +59,16 @@ public class TopicService {
         return topicRepo.findAll().stream().map((this::toTopicDto)).toList();
     }
 
+    public boolean deleteTopic(Long id) {
+        Optional<Topic> topic = topicRepo.findById(id);
+
+        if(topic.isEmpty())
+            return false;
+
+        topicRepo.delete(topic.get());
+        return true;
+    }
+
     private TopicDto toTopicDto(Topic topic) {
         TopicDto topicDto = new TopicDto();
         topicDto.setId(topic.getId());

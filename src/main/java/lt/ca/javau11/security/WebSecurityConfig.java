@@ -74,7 +74,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers( "/api/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/components/**", "/api/manufacturers/**", "/api/topics/**", "/api/topic/{topicId}/comments").permitAll()
-                                .requestMatchers("/api/topics/**", "/api/comments/add").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/api/topics/**", "/api/comments/**", "/api/users/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/api/**").hasRole("ADMIN")
 
 

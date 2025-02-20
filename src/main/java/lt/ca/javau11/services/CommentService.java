@@ -2,6 +2,7 @@ package lt.ca.javau11.services;
 
 import lombok.AllArgsConstructor;
 import lt.ca.javau11.entities.Comment;
+import lt.ca.javau11.entities.Component;
 import lt.ca.javau11.entities.DTOs.CommentDto;
 import lt.ca.javau11.entities.Topic;
 import lt.ca.javau11.entities.User;
@@ -16,6 +17,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -47,6 +49,26 @@ public class CommentService {
         commentRepo.save(comment);
 
         return toCommentDto(comment);
+    }
+
+    public CommentDto updateComment(Long id, CommentDto commentDto) {
+        Comment target = commentRepo.findById(id).orElseThrow( () -> new NotFoundException("Comment not found!"));
+
+        target.setContent(commentDto.getContent());
+
+        commentRepo.save(target);
+
+        return toCommentDto(target);
+    }
+
+    public boolean deleteComment(Long id) {
+        Optional<Comment> comment = commentRepo.findById(id);
+
+        if(comment.isEmpty())
+            return false;
+
+        commentRepo.delete(comment.get());
+        return true;
     }
 
     private CommentDto toCommentDto(Comment comment){

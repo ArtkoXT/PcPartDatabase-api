@@ -8,6 +8,7 @@ import org.hibernate.annotations.Formula;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "topics")
@@ -26,6 +27,9 @@ public class Topic {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     @Formula("(select count(*) from comments m where m.topic_id=id)")
     private int messageCount = 0;

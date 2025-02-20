@@ -2,6 +2,7 @@ package lt.ca.javau11.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lt.ca.javau11.entities.Topic;
 import lt.ca.javau11.entities.User;
 import lt.ca.javau11.security.jwt.JwtUtils;
 import lt.ca.javau11.security.services.UserDetailsImpl;
@@ -18,20 +19,12 @@ import java.util.List;
 public class UserController {
 
     UserService userService;
-    private JwtUtils jwtUtils;
 
-    @GetMapping("/profile")
-    public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
-
-        String jwt = jwtUtils.getJwtFromCookies(request);
-
-        if (jwt == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No JWT token found");
-
-        String email = jwtUtils.getEmailFromJwtToken(jwt);
-        if( email == null)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid JWT token");
-        return null;
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        boolean isDeleted = userService.deleteUser(id);
+        return isDeleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
+
 }

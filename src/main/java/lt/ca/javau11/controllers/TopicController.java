@@ -1,7 +1,6 @@
 package lt.ca.javau11.controllers;
 
 import lombok.AllArgsConstructor;
-import lt.ca.javau11.entities.Comment;
 import lt.ca.javau11.entities.DTOs.TopicDto;
 import lt.ca.javau11.entities.DTOs.TopicRequest;
 import lt.ca.javau11.entities.Topic;
@@ -30,5 +29,11 @@ public class TopicController {
     @PostMapping("/create")
     public Topic createTopic(@RequestBody TopicRequest topic) {
         return topicService.createTopic(topic);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Topic> deleteTopic(@PathVariable Long id) {
+        boolean isDeleted = topicService.deleteTopic(id);
+        return isDeleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

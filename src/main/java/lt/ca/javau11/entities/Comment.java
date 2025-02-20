@@ -26,6 +26,7 @@ public class Comment {
     private String content;
 
     @ManyToOne(optional=false)
+    @JoinColumn(name = "topic_id", nullable = false)
     private Topic topic;
 
     @ManyToOne
