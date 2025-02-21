@@ -23,7 +23,6 @@ public class ComponentService {
 
     ManufacturerRepository manufacturerRepo;
     ComponentRepository componentRepository;
-    EntityMapper entityMapper;
 
     public List<ComponentDto> listComponentsByCategory(Category category) {
         return componentRepository.findByCategory(category).stream().map(ComponentDto::new).toList();
