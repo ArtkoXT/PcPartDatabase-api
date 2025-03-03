@@ -15,31 +15,31 @@ bash
 git clone https://github.com/ArtkoXT/PcPartDatabase-api.git
 Navigate to the Project Directory:
 
-> cd PcPartDatabase-api
+`cd PcPartDatabase-api`
 
 Build with Maven:
 
 Using Installed Maven:
 
-> mvn clean install
+`mvn clean install`
 
 Using Maven Wrapper:
 
 On Unix-based systems:
 
-> ./mvnw clean install
+`./mvnw clean install`
 
 On Windows:
 
-> mvnw.cmd clean install
+`mvnw.cmd clean install`
 
 These commands will compile the source code, run tests, and package the application into a JAR file located in the target directory.
 
 ### Running the Application
 After building, you can run the application using the following command:
 
-bash
-java -jar target/pcpartdatabase-api-0.0.1-SNAPSHOT.jar
+`java -jar target/pcpartdatabase-api-0.0.1-SNAPSHOT.jar`
+
 Replace pcpartdatabase-api-0.0.1-SNAPSHOT.jar with the actual JAR filename if it differs.
 
 The application should now be running, and you can access the API endpoints as documented.
